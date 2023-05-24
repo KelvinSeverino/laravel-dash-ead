@@ -18,11 +18,11 @@
 <body>
 
     <body class="bg-gray-100 font-family-karla flex">
-        @include('admin.layouts._partials.header')
-
         @include('admin.layouts._partials.sidebar')
 
         <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
+
+            @include('admin.layouts._partials.header')
 
             <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
                 <main class="w-full flex-grow p-6">
