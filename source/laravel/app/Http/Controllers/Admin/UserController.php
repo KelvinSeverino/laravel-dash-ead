@@ -21,8 +21,6 @@ class UserController extends Controller
             filter: $request->get('filter', '')
         );
 
-        dd($users);
-
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', ['users' => $users]);
     }
 }

@@ -14,7 +14,7 @@ class UserRepository implements UserRepositoryInterface
         $this->model = $model;
     }
 
-    public function getAll(string $filter = ''): array
+    public function getAll(string $filter = ''): object|null
     {
         $users = $this->model
                         ->where(function ($query) use ($filter) {
@@ -25,7 +25,7 @@ class UserRepository implements UserRepositoryInterface
                         })
                         ->get();
 
-        return $users->toArray();
+        return $users;
     }
 
     public function findById(string $id): object|null

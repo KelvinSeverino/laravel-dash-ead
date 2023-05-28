@@ -13,9 +13,10 @@ class UserService
         $this->repository = $repository;
     }
 
-    public function getAll(string $filter = ''): array
+    public function getAll(string $filter = '')
     {
-        return $this->repository->getAll($filter);
+        $users = $this->repository->getAll($filter);
+        return $users;
     }
 
     public function findById(string $id): object|null
