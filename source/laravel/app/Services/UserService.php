@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\UserRepositoryInterface;
+use stdClass;
 
 class UserService
 {
@@ -16,6 +17,15 @@ class UserService
     public function getAll(string $filter = '')
     {
         $users = $this->repository->getAll($filter);
+
+        $users = array_map(function ($data) {
+            $stdClass = new stdClass;
+            foreach ($data as $key => $value) {
+                $stdClass->{$key} = $value;
+            }
+            return $stdClass;
+        }, $users);
+
         return $users;
     }
 
