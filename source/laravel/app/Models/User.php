@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
@@ -42,4 +44,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /*Funcao para mudar formato da data
+     *Do tipo Accessor, que transforma atributo do Eloquent antes de retorna-lo*/
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => Carbon::make($value)->format('d/m/Y'),
+        );
+    }
+
+    //Funcao para alterar formato da data antes de exibi-la
+    // public function getCreatedAtAttribute()
+    // {
+    //     return Carbon::make($this->attributes['created_at'])->format('d/m/Y');
+    // }
 }
