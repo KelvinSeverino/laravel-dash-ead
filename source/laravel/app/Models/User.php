@@ -43,7 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'id' => 'string',
     ];
+
+    public $incrementing = false;
 
     /*Funcao para mudar formato da data
      *Do tipo Accessor, que transforma atributo do Eloquent antes de retorna-lo*/
