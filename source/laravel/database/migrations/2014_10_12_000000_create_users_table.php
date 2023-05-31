@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->softDeletes(); //Realiza exclusao suave, como se fosse arquivamento, assim o dado e mantido e pode ser restaurado
             $table->timestamps();
         });
     }

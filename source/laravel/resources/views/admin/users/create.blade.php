@@ -3,7 +3,9 @@
 @section('title', 'Cadastrar Novo Usuário')
 
 @section('content')
-    <h1 class="w-full text-3xl text-black pb-6">Adicionar novo Usuário</h1>
+    <h1 class="w-full text-3xl text-black pb-6">
+        Adicionar novo Usuário
+    </h1>
 
     <div class="flex flex-wrap">
         <div class="w-full my-6 pr-0 lg:pr-2">
