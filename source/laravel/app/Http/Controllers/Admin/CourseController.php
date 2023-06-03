@@ -33,7 +33,7 @@ class CourseController extends Controller
 
     public function store(StoreUpdateCourseRequest $request, UploadFile $uploadFile)
     {
-        $data = $request->only('name');
+        $data = $request->only(['name', 'description']);
         $data['available'] = isset($request->available);
 
         if($request->image){
@@ -65,7 +65,7 @@ class CourseController extends Controller
 
     public function update(StoreUpdateCourseRequest $request, UploadFile $uploadFile, string $id)
     {
-        $data = $request->only('name');
+        $data = $request->only(['name', 'description']);
         $data['available'] = isset($request->available);
 
         $course = $this->service->findById($id);
