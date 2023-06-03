@@ -24,4 +24,14 @@ class CourseService
     {
         $this->repository->create($data);
     }
+
+    public function findById(string $id): object|null
+    {
+        return $this->repository->findById($id);
+    }
+
+    public function update(string $id, array $data): object|null
+    {
+        return $this->repository->update($id, $data);
+    }
 }
