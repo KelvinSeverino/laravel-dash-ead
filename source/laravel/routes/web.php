@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{
     AdminController,
     UserController,
     DashboardController,
+    CourseController,
 };
 
 /*
@@ -14,6 +15,11 @@ use App\Http\Controllers\Admin\{
 */
 
 Route::prefix('admin')->group(function () {
+    /**
+     * Routes Courses
+     */
+    Route::resource('/courses', CourseController::class); //resource facilita para nao informar as rotas de crud padrao
+
     /**
      * Routes Admins
      */
