@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Course;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreCourseRequest extends FormRequest
+class StoreUpdateCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +22,16 @@ class StoreCourseRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        //$id = $this->segment(3); //Pega o segmento da URL /admins/courses/id
+        $id = $this->course; //Pega ID pelo name do parametro
+
+        $rules = [
             'name' => [
                 'required',
                 'min:3',
                 'max:255',
-                'unique:courses',
+                //"unique:courses,name,{$id},id",
+                Rule::unique('courses')->ignore($id), //valida o campo name como unico, mas exceto quando for do ID informado
             ],
             'image' => [
                 'nullable',
@@ -43,5 +48,15 @@ class StoreCourseRequest extends FormRequest
                 'boolean',
             ]
         ];
+
+        //Alterar validação
+        /*if($this->method() == 'PUT'){
+            $rules['image'] = [
+                'nullable',
+                'image',
+            ];
+        }*/
+
+        return $rules;
     }
 }
