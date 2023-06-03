@@ -47,7 +47,11 @@ class CourseController extends Controller
 
     public function show(string $id)
     {
-        //
+        if(!$course = $this->service->findById($id)){
+            return back();
+        }
+
+        return view('admin.courses.show', compact('course'));
     }
 
     public function edit(string $id)
@@ -83,6 +87,10 @@ class CourseController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        if(!$this->service->delete($id)){
+            return back();
+        }
+
+        return redirect()->route('courses.index');
     }
 }
