@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +24,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
     ];
 
     /**
@@ -41,5 +45,23 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'id' => 'string',
     ];
+
+    public $incrementing = false;
+
+    /*Funcao para mudar formato da data
+     *Do tipo Accessor, que transforma atributo do Eloquent antes de retorna-lo*/
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => Carbon::make($value)->format('d/m/Y'),
+        );
+    }
+
+    //Funcao para alterar formato da data antes de exibi-la
+    // public function getCreatedAtAttribute()
+    // {
+    //     return Carbon::make($this->attributes['created_at'])->format('d/m/Y');
+    // }
 }

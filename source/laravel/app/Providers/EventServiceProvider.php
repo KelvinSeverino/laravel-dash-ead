@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\{
+    Admin,
     User
 };
 use App\Observers\{
+    AdminObserver,
     UserObserver
 };
 use Illuminate\Auth\Events\Registered;
@@ -32,6 +34,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         User::observe(UserObserver::class);
+        Admin::observe(AdminObserver::class);
     }
 
     /**
