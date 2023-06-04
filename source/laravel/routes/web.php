@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\{
     UserController,
     DashboardController,
     CourseController,
+    ModuleController,
 };
 
 /*
@@ -15,6 +16,14 @@ use App\Http\Controllers\Admin\{
 */
 
 Route::prefix('admin')->group(function () {
+    /**
+     * Modules Courses
+     */
+    Route::resource(
+        name: '/courses/{courseId}/modules',
+        controller: ModuleController::class
+    ); //usando recurso do php8 de passar parametros nomeados, funciona igual ao codigo abaixo
+
     /**
      * Routes Courses
      */
