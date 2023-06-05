@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\User as Model;
+use App\Models\Module as Model;
 use App\Repositories\ModuleRepositoryInterface;
 
 class ModuleRepository implements ModuleRepositoryInterface
@@ -14,7 +14,7 @@ class ModuleRepository implements ModuleRepositoryInterface
         $this->model = $model;
     }
 
-    public function getAll(string $filter = ''): array
+    public function getAllByCourseId(string $courseId, string $filter = ''): array
     {
         $modules = $this->model
                         ->where(function ($query) use ($filter) {
@@ -22,6 +22,7 @@ class ModuleRepository implements ModuleRepositoryInterface
                                 $query->orWhere('name', 'LIKE', "%{$filter}%");
                             }
                         })
+                        ->where('course_id', $courseId)
                         ->get();
 
         return $modules->toArray();
@@ -32,8 +33,11 @@ class ModuleRepository implements ModuleRepositoryInterface
         return $this->model->find($id);
     }
 
-    public function create(array $data): object
+    public function createByCourse(string $courseId, array $data): object
     {
+        //Passando separadamente o ID, mas poderia ser passado direto no $data e validado la na Request
+        $data['course_id'] = $courseId;
+
         return $this->model->create($data);
     }
 

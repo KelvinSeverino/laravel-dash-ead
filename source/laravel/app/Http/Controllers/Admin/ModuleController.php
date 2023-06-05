@@ -18,9 +18,9 @@ class ModuleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($courseId)
     {
-        //
+        dd($this->repository->getAllByCourseId($courseId));
     }
 
     /**

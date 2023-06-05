@@ -19,7 +19,7 @@ return [
         ],
         [
             'name' => 'Cursos',
-            'url' => '/admin/cursos',
+            'url' => '/admin/courses',
             'icon' => 'fas fa-video',
         ],
     ],
