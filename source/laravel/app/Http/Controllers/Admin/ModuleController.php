@@ -71,9 +71,17 @@ class ModuleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($courseId, $id)
     {
-        //
+        if (!$course = $this->repositoryCourse->findById($courseId)) {
+            return back();
+        }
+
+        if (!$module = $this->repository->findById($id)) {
+            return back();
+        }
+
+        return view('admin.courses.modules.show', compact('course', 'module'));
     }
 
     /**
@@ -109,8 +117,12 @@ class ModuleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($courseId, $id)
     {
-        //
+        if(!$this->repository->delete($id)){
+            return back();
+        }
+
+        return redirect()->route('modules.index', $courseId);
     }
 }
