@@ -41,17 +41,30 @@ class ModuleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($courseId)
     {
-        //
+        if (!$course = $this->repositoryCourse->findById($courseId)) {
+            return back();
+        }
+
+        return view('admin.courses.modules.create', compact('course'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $courseId)
     {
-        //
+        if (!$course = $this->repositoryCourse->findById($courseId)) {
+            return back();
+        }
+
+        $this->repository
+            ->createByCourse($courseId, $request->only(['name']));
+
+        // $course->modules()->create($request->only(['name']));
+
+        return redirect()->route('modules.index', $courseId);
     }
 
     /**
