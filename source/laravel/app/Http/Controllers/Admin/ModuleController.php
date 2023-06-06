@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Module\StoreUpdateModuleRequest;
 use App\Repositories\{
     CourseRepositoryInterface,
     ModuleRepositoryInterface
@@ -53,7 +54,7 @@ class ModuleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $courseId)
+    public function store(StoreUpdateModuleRequest $request, $courseId)
     {
         if (!$course = $this->repositoryCourse->findById($courseId)) {
             return back();
@@ -78,17 +79,31 @@ class ModuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($courseId, $id)
     {
-        //
+        if (!$course = $this->repositoryCourse->findById($courseId)) {
+            return back();
+        }
+
+        if (!$module = $this->repository->findById($id)) {
+            return back();
+        }
+
+        return view('admin.courses.modules.edit', compact('course', 'module'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateModuleRequest $request, $courseId, $id)
     {
-        //
+        if (!$this->repositoryCourse->findById($courseId)) {
+            return back();
+        }
+
+        $this->repository->update($id, $request->only(['name']));
+
+        return redirect()->route('modules.index', $courseId);
     }
 
     /**

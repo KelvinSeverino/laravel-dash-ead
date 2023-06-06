@@ -16,6 +16,15 @@ class Module extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'id' => 'string',
+    ];
+
+    /**
      * course - gera relacionamento entre tabelas / traz o curso da aula
      */
     public function course()
