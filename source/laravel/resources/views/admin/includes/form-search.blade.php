@@ -1,6 +1,6 @@
 
 <p class="text-xl pb-3 flex items-center">
-    <form action="{{ route($routerName) }}" method="get">
+    <form action="{{ route($routerName, $params ?? '') }}" method="get">
         <div>
             <div class="mb-3 xl:w-96">
                 <div class="input-group relative flex flex-wrap items-stretch w-full mb-4">
