@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\{
     CourseController,
     ModuleController,
     LessonController,
+    SupportController,
 };
 
 /*
@@ -17,6 +18,11 @@ use App\Http\Controllers\Admin\{
 */
 
 Route::prefix('admin')->group(function () {
+    /**
+     * Routes Supports
+     */
+    Route::get('/supports', [SupportController::class, 'index'])->name('supports.index');
+
     /**
      * Routes Lessons Modules Courses
      */
