@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\{
     DashboardController,
     CourseController,
     ModuleController,
+    LessonController,
 };
 
 /*
@@ -17,7 +18,12 @@ use App\Http\Controllers\Admin\{
 
 Route::prefix('admin')->group(function () {
     /**
-     * Modules Courses
+     * Routes Lessons Modules Courses
+     */
+    Route::resource('/modules/{moduleId}/lessons', LessonController::class);
+
+    /**
+     * Routes Modules Courses
      */
     Route::resource(
         name: '/courses/{courseId}/modules',
