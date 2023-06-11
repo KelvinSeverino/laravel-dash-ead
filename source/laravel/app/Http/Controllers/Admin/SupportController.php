@@ -48,7 +48,8 @@ class SupportController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $support = '';
+        return view('admin.supports.show', compact('support'));
     }
 
     /**
