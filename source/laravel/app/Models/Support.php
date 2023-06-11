@@ -14,6 +14,12 @@ class Support extends Model
     ];
 
     /**
+     * Indicates if the model's ID is auto-incrementing.
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * user - gera relacionamento entre tabelas / traz o aluno do suporte
      */
     public function user()

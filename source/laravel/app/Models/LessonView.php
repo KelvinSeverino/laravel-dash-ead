@@ -12,6 +12,12 @@ class LessonView extends Model
     protected $fillable = ['user_id', 'lesson_id', 'qty'];
 
     /**
+     * Indicates if the model's ID is auto-incrementing.
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * lesson - gera relacionamento entre tabelas / traz o a aula da visualizacao
      */
     public function lesson()

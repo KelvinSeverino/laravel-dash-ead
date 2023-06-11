@@ -14,6 +14,12 @@ class Lesson extends Model
     ];
 
     /**
+     * Indicates if the model's ID is auto-incrementing.
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
