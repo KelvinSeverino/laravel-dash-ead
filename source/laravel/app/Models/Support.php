@@ -34,4 +34,12 @@ class Support extends Model
     {
         return $this->belongsTo(Lesson::class);
     }
+
+    /**
+     * replies - gera relacionamento entre tabelas / traz as respostas do suporte
+     */
+    public function replies()
+    {
+        return $this->hasMany(ReplySupport::class);
+    }
 }

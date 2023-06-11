@@ -48,7 +48,10 @@ class SupportController extends Controller
      */
     public function show(string $id)
     {
-        $support = '';
+        if(!$support = $this->service->getSupport($id)){
+            return back();
+        }
+
         return view('admin.supports.show', compact('support'));
     }
 
