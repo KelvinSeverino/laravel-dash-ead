@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\{
     ModuleController,
     LessonController,
     SupportController,
+    ReplySupportController,
 };
 
 /*
@@ -18,6 +19,11 @@ use App\Http\Controllers\Admin\{
 */
 
 Route::prefix('admin')->group(function () {
+    /**
+     * Routes Reply Support
+     */
+    Route::post('/supports/{id}/reply', [ReplySupportController::class, 'store'])->name('replies.store');
+
     /**
      * Routes Supports
      */
