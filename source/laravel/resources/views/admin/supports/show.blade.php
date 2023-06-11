@@ -57,7 +57,7 @@
                     {{-- @foreach ($support->replies as $reply)
                         <div class="chat-message">
                             @php
-                                $user = $reply->user ?? $reply->admin;
+                                $user = $user ?? $reply->admin;
                             @endphp
                             @if ($user->id == $support->user->id)
                                 <div class="flex items-end">
@@ -83,14 +83,16 @@
 
                     @foreach ($support->replies as $reply)
                         @php
-                            $whenRepliesIsAuthor = $reply->user->id == $support->user->id;
+                            $user = $reply->user ?? $reply->admin;
+
+                            $whenRepliesIsAuthor = $user->id == $support->user->id;
                             $classChatMessage = $whenRepliesIsAuthor ? '' : 'justify-end';
                             $bgChat = $whenRepliesIsAuthor ? 'rounded-bl-none bg-gray-300 text-gray-600' : 'rounded-br-none bg-blue-600 text-white';
 
                             $orderImg = $whenRepliesIsAuthor ? 'order-1' : 'order-2';
                             $orderText = $whenRepliesIsAuthor ? 'order-2' : 'order-1';
 
-                            $image = $reply->user->image ? url("storage/{$reply->user->image}") : url('images/user.png');
+                            $image = $user->image ? url("storage/{$user->image}") : url('images/user.png');
                         @endphp
 
                         <div class="chat-message">
@@ -110,8 +112,10 @@
 
                 <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
                     <div class="relative flex">
-                        <form action="{{ route('replies.store', $support->id) }}" method="post">
+                        <form action="{{ route('replies.store', $support->id) }}" method="post" class="w-full">
                             @csrf
+                            <input type="hidden" name="support_id" value="{{ $support->id }}">
+
                             <span class="absolute inset-y-0 flex items-center">
                                 <button type="button" class="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-gray-600">

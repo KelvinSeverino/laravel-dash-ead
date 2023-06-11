@@ -8,15 +8,18 @@ use Illuminate\Http\Request;
 
 class ReplySupportController extends Controller
 {
-    protected $service;
+    protected $repository;
 
-    public function __construct(ReplySupportRepositoryInterface $service)
+    public function __construct(ReplySupportRepositoryInterface $repository)
     {
-        $this->service = $service;
+        $this->repository = $repository;
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $supportId)
     {
-        dd($request->all());
+        $data = $request->only('description', 'support_id');
+        $this->repository->createReplyToSupport($data);
+
+        return redirect()->route('supports.show', $supportId);
     }
 }
