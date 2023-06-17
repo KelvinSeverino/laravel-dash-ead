@@ -47,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($supports as $support)
+                @forelse ($supports->items() as $support)
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
@@ -92,5 +92,7 @@
         </table>
     </div>
 </div>
+
+@include('admin.includes.paginator', ['data' => $supports])
 
 @endsection
