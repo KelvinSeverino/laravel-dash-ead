@@ -14,14 +14,22 @@ return new class extends Migration
         Schema::create('reply_support', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('support_id')->index();
-            $table->uuid('admin_id')->nullable();
-            $table->uuid('user_id')->nullable();
+            $table->uuid('admin_id')->index()->nullable();
+            $table->uuid('user_id')->index()->nullable();
             $table->text('description');
             $table->timestamps();
 
             $table->foreign('support_id')
                     ->references('id')
                     ->on('supports');
+
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users');
+
+            $table->foreign('admin_id')
+                    ->references('id')
+                    ->on('admins');
         });
     }
 
