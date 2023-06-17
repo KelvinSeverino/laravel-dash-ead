@@ -23,6 +23,7 @@ class SupportController extends Controller
     {
         $supports = $this->service->getSupports(
             status: $request->get('status', 'P'),
+            page: (int) $request->get('page', 1)
         );
 
         $statusOptions = SupportEnum::cases();

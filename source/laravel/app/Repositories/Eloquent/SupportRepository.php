@@ -14,11 +14,15 @@ class SupportRepository implements SupportRepositoryInterface
         $this->model = $model;
     }
 
-    public function getByStatus(string $status): array
+    public function getByStatus(string $status, int $page): array
     {
+        $limit = 15;
+        $skip = ($page - 1) * $limit;
         $supports = $this->model
                         ->where('status', $status)
                         ->with(['user', 'lesson']) //Traz do relacionamento da Model Support com User e Lesson
+                        ->skip($skip)
+                        ->limit($limit)
                         ->get();
 
         return $supports->toArray();
